@@ -1,11 +1,16 @@
+# This is a project for Udacity Programming For Data Science Nanodegree
+# Project 2 : Explore US Bikeshare Data
+
 import time
 import pandas as pd
 import numpy as np
 
+# creating CITY_DATA global variable
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
+# creating MONTHS and WEEKDAYS global variables
 MONTHS = ['all', 'january', 'february', 'march', 'april', 'may', 'june']
 WEEKDAYS = ['all', 'monday', 'tuesday', 'wednesday', 'thrusday', 'friday', 'saturday', 'sunday']
 
@@ -19,7 +24,6 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     print("You can choose the following cities: - Chicago, New York City, Washington")
     is_valid = True
     while is_valid:
@@ -29,7 +33,6 @@ def get_filters():
         else: 
             is_valid = False
     is_valid = True  
-    # TO DO: get user input for month (all, january, february, ... , june)
     
     while is_valid:
         print("Choose any month from January upto June or all")
@@ -39,7 +42,6 @@ def get_filters():
         else: 
             is_valid = False
     is_valid = True
-    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     
     while is_valid:
         day = input("Enter the week day : ").lower()
@@ -82,15 +84,12 @@ def time_stats(df):
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
-    # TO DO: display the most common month
     print("Most common month")
     print(df['month'].mode()[0])
 
-    # TO DO: display the most common day of week
     print("Most common day of week")
     print(df['day'].mode()[0])
 
-    # TO DO: display the most common start hour
     print("most common start hour")
     df['hour'] = df['Start Time'].dt.hour
     print(df['hour'].mode()[0])
@@ -105,15 +104,12 @@ def station_stats(df):
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
 
-    # TO DO: display most commonly used start station
     print("most common start station")
     print(df['Start Station'].mode()[0])
 
-    # TO DO: display most commonly used end station
     print("most commone end staion")
     print(df['End Station'].mode()[0])
 
-    # TO DO: display most frequent combination of start station and end station trip
     print("Most Common Bike Trip")
     df['Start End'] = df['Start Station'].map(str) + df['End Station'].map(str)
     print(df['Start End'].mode()[0])
@@ -130,11 +126,9 @@ def trip_duration_stats(df):
     
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['End Time'] = pd.to_datetime(df['End Time'])
-    # TO DO: display total travel time
     print("Total Travel Time")
     print((df['End Time'] - df['Start Time']).sum())
 
-    # TO DO: display mean travel time
     print("Average Travel Time")
     print((df['End Time'] - df['Start Time']).sum() / len(df['Start Time']) )
 
@@ -148,16 +142,14 @@ def user_stats(df):
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
-    # TO DO: Display counts of user types
     print("Types of Users")
     print(df['User Type'].value_counts())
     
+    # using a try-else block to handle exceptions
     try:
-        # TO DO: Display counts of gender
         print("Gender Types Counts")
         print(df['Gender'].value_counts())
 
-        # TO DO: Display earliest, most recent, and most common year of birth
         print("Earlist Birth Year")
         print(df['Birth Year'].min())
 
@@ -175,6 +167,7 @@ def user_stats(df):
 
 
 def main():
+    # using a while loop to handle user's loop intentions
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
