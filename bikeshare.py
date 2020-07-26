@@ -5,10 +5,12 @@ import time
 import pandas as pd
 import numpy as np
 
+# creating CITY_DATA global variable
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
+# creating MONTHS and WEEKDAYS global variables
 MONTHS = ['all', 'january', 'february', 'march', 'april', 'may', 'june']
 WEEKDAYS = ['all', 'monday', 'tuesday', 'wednesday', 'thrusday', 'friday', 'saturday', 'sunday']
 
@@ -143,6 +145,7 @@ def user_stats(df):
     print("Types of Users")
     print(df['User Type'].value_counts())
     
+    # using a try-else block to handle exceptions
     try:
         print("Gender Types Counts")
         print(df['Gender'].value_counts())
@@ -164,6 +167,7 @@ def user_stats(df):
 
 
 def main():
+    # using a while loop to handle user's loop intentions
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
